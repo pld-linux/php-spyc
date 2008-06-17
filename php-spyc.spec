@@ -7,11 +7,10 @@ Group:		Development/Languages/PHP
 URL:		http://spyc.sourceforge.net/
 Source0:	http://dl.sourceforge.net/spyc/spyc-%{version}.tar.gz
 # Source0-md5:	5b25e949e3c016811b194aff8be50d6b
+BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	php-common
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		php_datadir		/usr/share/php
 
 %description
 Spyc is a YAML loader/dumper written in PHP. Given a YAML document,
@@ -36,8 +35,8 @@ EOF
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{php_datadir},%{_examplesdir}/%{name}-%{version}}
-cp -a spyc.php spyc.php4 spyc.php5 $RPM_BUILD_ROOT%{php_datadir}
+install -d $RPM_BUILD_ROOT{%{php_data_dir},%{_examplesdir}/%{name}-%{version}}
+cp -a spyc.php spyc.php4 spyc.php5 $RPM_BUILD_ROOT%{php_data_dir}
 cp -a test.* yaml-{dump,load}.php spyc.yaml $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
@@ -46,5 +45,5 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES README
-%{php_datadir}/*
+%{php_data_dir}/*
 %{_examplesdir}/%{name}-%{version}
